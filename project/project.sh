@@ -1,3 +1,3 @@
 #!/bin/bash
 echo RUNNING
-python -m script.py
+python -m pipeline.py
