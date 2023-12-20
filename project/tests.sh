@@ -1,7 +1,7 @@
 #!/bin/bash
 echo RUNNING
 # Execute the data pipeline
-python -m script.py
+python -m pipeline.py
 
 data_file="C:\Users\Impana\OneDrive\Desktop\MAde_project\project\data\my_database_db"
 
