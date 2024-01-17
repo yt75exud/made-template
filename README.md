@@ -12,5 +12,5 @@ This repository has been created as part of my enrollment in the Advanced Method
 
 ##
 REPORT: https://github.com/yt75exud/made-template-ws2324/blob/main/project/report.ipynb
-SLIDE: 
+SLIDE: https://github.com/yt75exud/made-template-ws2324/blob/main/project/slides.pdf
 
