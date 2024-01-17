@@ -10,5 +10,7 @@ This project seeks to explore the correlation between accident and weather data 
 
 This repository has been created as part of my enrollment in the Advanced Methods of Software Engineering course offered by the Professorship of Open-Source Software at FAU. The assignment involved developing a Data Engineering Project that utilizes a minimum of two publicly available datasources, processing them through an automated datapipeline, and presenting key findings from the outcomes.
 
-
+##
+REPORT: https://github.com/yt75exud/made-template-ws2324/blob/main/project/report.ipynb
+SLIDE: 
 
