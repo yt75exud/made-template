@@ -1,0 +1,58 @@
+pipeline TempBaterry
+{
+    block FileExtractor oftype HttpExtractor {url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"; }
+    block ZipInterpreter oftype ArchiveInterpreter { archiveType: "zip";}
+    block DataPicker oftype FilePicker { path: "/data.csv";}
+    
+    block CSVInterpreter oftype CSVInterpreter {delimiter: ";"; }
+    block TextInterpreter oftype TextFileInterpreter {}
+
+    block ColDeleter oftype ColumnDeleter { delete: [column F, column G, column H, column I]; }
+    block ColDataSelector oftype CellRangeSelector {select: range A1:K*;}
+    
+    block TableDataInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Geraet" oftype integer, "Hersteller" oftype text, "Model" oftype text, "Monat" oftype integer,
+            "Temperatur" oftype decimal, "Batterietemperatur" oftype decimal, "Geraet aktiv" oftype text,
+        ];
+    }
+  block TempTransformerA oftype TableTransformer
+   {
+        inputColumns: ['Temperatur'];
+        outputColumn: 'Temperatur';
+        use: TempConvert;
+    }
+
+    block TempTransformerB oftype TableTransformer 
+    {
+        inputColumns: ['Batterietemperatur'];
+        outputColumn: 'Batterietemperatur';
+        use: TempConvert;
+    }
+
+    block DataLoader oftype SQLiteLoader 
+    { 
+        table: "temperatures"; 
+        file: "./temperatures.sqlite"; 
+    }
+
+    FileExtractor
+    ->ZipInterpreter
+    ->DataPicker
+    ->TextInterpreter
+    ->CSVInterpreter
+    ->ColDataSelector
+    ->ColDeleter
+    ->TableDataInterpreter
+    ->TempTransformerA
+    ->TempTransformerB
+    ->DataLoader;
+}
+transform TempConvert
+{
+  from tempCelsius oftype decimal;
+  to tempFahrenheit oftype decimal;
+
+  tempFahrenheit: (tempCelsius * 9/5) + 32;
+}
