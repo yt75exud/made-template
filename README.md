@@ -1,6 +1,6 @@
 # Methods of Advanced Data Engineering Template Project
 
-## Correlation between monthly figures for traffic accidents and weather figures in Münster region.
+## Correlation between monthly figures for traffic accidents and weather figures in Münich region.
 
 ## Overview
 
